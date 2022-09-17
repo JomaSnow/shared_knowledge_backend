@@ -1,4 +1,12 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { SayingDTO } from './dto/saying.dto';
 import { SayingsService } from './sayings.service';
 
@@ -11,28 +19,23 @@ export class SayingsController {
     return this.sayingsService.create(data);
   }
 
-  // @Post()
-  // create(@Body() createSayingDto: CreateSayingDto) {
-  //   return this.sayingsService.create(createSayingDto);
-  // }
+  @Get()
+  findAll() {
+    return this.sayingsService.findAll();
+  }
 
-  // @Get()
-  // findAll() {
-  //   return this.sayingsService.findAll();
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.sayingsService.findOne(id);
+  }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.sayingsService.findOne(+id);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() data: SayingDTO) {
+    return this.sayingsService.update(id, data);
+  }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateSayingDto: UpdateSayingDto) {
-  //   return this.sayingsService.update(+id, updateSayingDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.sayingsService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.sayingsService.remove(id);
+  }
 }

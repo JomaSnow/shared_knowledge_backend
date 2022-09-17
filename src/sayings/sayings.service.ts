@@ -14,23 +14,58 @@ export class SayingsService {
     return saying;
   }
 
-  // create(createSayingDto: CreateSayingDto) {
-  //   return 'This action adds a new saying';
-  // }
+  async findAll() {
+    return await this.prisma.sayings.findMany();
+  }
 
-  // findAll() {
-  //   return `This action returns all sayings`;
-  // }
+  async findOne(id: string) {
+    const saying = await this.prisma.sayings.findUnique({
+      where: {
+        id,
+      },
+    });
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} saying`;
-  // }
+    if (!saying) {
+      return { errorMsg: 'Este ditado não existe.' };
+    }
 
-  // update(id: number, updateSayingDto: UpdateSayingDto) {
-  //   return `This action updates a #${id} saying`;
-  // }
+    return saying;
+  }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} saying`;
-  // }
+  async update(id: string, data: SayingDTO) {
+    const saying = await this.prisma.sayings.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!saying) {
+      return { errorMsg: 'Este ditado não existe.' };
+    }
+
+    return await this.prisma.sayings.update({
+      data,
+      where: {
+        id,
+      },
+    });
+  }
+
+  async remove(id: string) {
+    const saying = await this.prisma.sayings.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!saying) {
+      return { errorMsg: 'Este ditado não existe.' };
+    }
+
+    return await this.prisma.sayings.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }
