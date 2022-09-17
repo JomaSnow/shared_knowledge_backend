@@ -1,42 +1,38 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
+import { SayingDTO } from './dto/saying.dto';
 import { SayingsService } from './sayings.service';
-import { CreateSayingDto } from './dto/create-saying.dto';
-import { UpdateSayingDto } from './dto/update-saying.dto';
 
 @Controller('sayings')
 export class SayingsController {
   constructor(private readonly sayingsService: SayingsService) {}
 
   @Post()
-  create(@Body() createSayingDto: CreateSayingDto) {
-    return this.sayingsService.create(createSayingDto);
+  async create(@Body() data: SayingDTO) {
+    return this.sayingsService.create(data);
   }
 
-  @Get()
-  findAll() {
-    return this.sayingsService.findAll();
-  }
+  // @Post()
+  // create(@Body() createSayingDto: CreateSayingDto) {
+  //   return this.sayingsService.create(createSayingDto);
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.sayingsService.findOne(+id);
-  }
+  // @Get()
+  // findAll() {
+  //   return this.sayingsService.findAll();
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSayingDto: UpdateSayingDto) {
-    return this.sayingsService.update(+id, updateSayingDto);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.sayingsService.findOne(+id);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.sayingsService.remove(+id);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateSayingDto: UpdateSayingDto) {
+  //   return this.sayingsService.update(+id, updateSayingDto);
+  // }
+
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.sayingsService.remove(+id);
+  // }
 }
