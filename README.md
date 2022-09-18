@@ -1,73 +1,51 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Shared Knowledge
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Shared Knowledge é um pequeno projeto para praticar desenvolvimento full-stack com tecnologias e ferramentas atuais. Resolvi dividir o pojeto em 2 repositórios, um para o back-end e outro para o front-end. Você está vendo o repositório **back-end**. [Clique aqui para ver o repositório front-end](https://github.com).
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Sobre o projeto
 
-## Description
+A ideia do projeto é construir uma página web na qual a cada alguns segundos uma mensagem inspiradora, conhecimento, ditado, ou algum outro pequeno texto apareçam na tela para serem compartilhados com o mundo. O site deve ter uma página inicial para exibir as mensagens, uma página para falar sobre o projeto e linkar para o github, uma página para fazer login ou criar conta, uma página para editar informações da conta e uma página para criar, editar, deletar e visualizar suas mensagens. Existe, ainda, uma página para administradores gerenciarem todas as mensagens e usuários cadastrados.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Qualquer visitante da página pode acessar e ler as mensagens do site, mas apenas Usuários autenticados podem postar mensagens. Usuários comuns podem criar novas mensagens, deletar e atualizar apenas as suas próprias e visualizar todas; eles não podem ver, criar, editar nem deletar outros usuários, além deles mesmos. Usuários administradores podem criar, visualizar, editar e apagar quaisquer mensagens; e podem também visualizar, editar e apagar qualquer usuário.
 
-## Installation
+### Objetivos do back-end
 
-```bash
-$ npm install
-```
+Os objetivos maiores do projeto por parte do back-end são:
+  - Utilizar Docker para cuidar do Banco de Dados;
+    - Criar container rodando PostgreSQL
+  - Aprender Nest JS;
+    - Criar CRUDs básicos
+    - Criar relacionamentos
+    - Tratar erros HTTP
+    - Utilizar criptografia para as senhas
+    - Utilizar JWT para o login
+  - Aprender Prisma;
+    - Conectar com o banco
+    - Criar migrações
+    
+### Recursos utilizados
 
-## Running the app
+Alguns vídeos e guias que ajudaram no desenvolvimento deste projeto:
+- [Docker and PostgreSQL in [10 Minutes] - vídeo](https://www.youtube.com/watch?v=aHbE3pTyG-Q)
+- [Criando uma aplicação com NestJS e PrismaIO - vídeo](https://www.youtube.com/watch?v=0Idug0e9tPw)
+- [AUTENTICAÇÃO COM JWT NO NESTJS - vídeo](https://www.youtube.com/watch?v=jMprSQlDLGo)
+- [Hash de senha no Prisma - stackverflow](https://stackoverflow.com/questions/69233726/cannot-hash-the-users-password-with-prisma-middleware-in-nestjs-on-create-user)
+- [HTTP Status Codes Cheat Sheet - blog](https://cheatography.com/kstep/cheat-sheets/http-status-codes/)
 
-```bash
-# development
-$ npm run start
 
-# watch mode
-$ npm run start:dev
+### Aprendizados
 
-# production mode
-$ npm run start:prod
-```
+O que aprendi, técnicas e comandos, durante esse projeto (para o João do futuro consultar, de nada futuro eu):
+- 
 
-## Test
+### Como executar o projeto localmente
 
-```bash
-# unit tests
-$ npm run test
+Pré-requisito ter instalado Docker, NPM e Yarn.
 
-# e2e tests
-$ npm run test:e2e
+1. Criar e executar container rodando postgres
+2. Clonar repositório
+3. Criar arquivo .env com a url do banco de dados (utilizar login e senha usados no container)
+4. Rodar *yarn* para instalar dependências
+5. Rodar *yarn prisma migrate dev* para criar o banco de dados de fato
+6. Rodar *yarn start*
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
