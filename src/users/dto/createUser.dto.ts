@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, Matches } from 'class-validator';
-import { RegexValidator } from '../../helper/validators';
+import { MessageValidator, RegexValidator } from '../../helper/validators';
 
 enum Role {
   ADMIN = 'ADMIN',
@@ -18,7 +18,9 @@ export class CreateUserDTO {
   lastName: string;
 
   @IsNotEmpty()
-  @Matches(RegexValidator.password)
+  @Matches(RegexValidator.password, {
+    message: MessageValidator.invalidPasswordMessage,
+  })
   password: string;
 
   role: Role;
