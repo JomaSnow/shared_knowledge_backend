@@ -19,3 +19,20 @@ model Sayings {
 
   @@map("tb_sayings")
 }
+
+model Users {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  firstName  String
+  lastName   String
+  password   String
+  role       Role     @default(USER)
+  created_at DateTime @default(now())
+
+  @@map("tb_users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}

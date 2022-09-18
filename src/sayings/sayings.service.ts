@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../database/PrismaService';
 import { SayingDTO } from './dto/saying.dto';
 
@@ -7,26 +7,47 @@ export class SayingsService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: SayingDTO) {
-    const saying = await this.prisma.sayings.create({
-      data,
-    });
+    const saying = await this.prisma.sayings
+      .create({
+        data,
+      })
+      .catch((e) => {
+        throw new HttpException(
+          `Algo deu errado ao criar este Ditado. Erro: ${e}`,
+          502,
+        );
+      });
 
     return saying;
   }
 
   async findAll() {
-    return await this.prisma.sayings.findMany();
+    return await this.prisma.sayings
+      .findMany()
+      .catch((e) => {
+        throw new HttpException(
+          `Algo deu errado ao resgatar Ditados. Erro: ${e}`,
+          502,
+        );
+      });
   }
 
   async findOne(id: string) {
-    const saying = await this.prisma.sayings.findUnique({
-      where: {
-        id,
-      },
-    });
+    const saying = await this.prisma.sayings
+      .findUnique({
+        where: {
+          id,
+        },
+      })
+      .catch((e) => {
+        throw new HttpException(
+          `Algo deu errado ao resgatar este Ditado. Erro: ${e}`,
+          502,
+        );
+      });
 
     if (!saying) {
-      return { errorMsg: 'Este ditado não existe.' };
+      throw new HttpException('Ditado não encontrado. Ele não existe.', 404);
     }
 
     return saying;
@@ -40,15 +61,22 @@ export class SayingsService {
     });
 
     if (!saying) {
-      return { errorMsg: 'Este ditado não existe.' };
+      throw new HttpException('Ditado não encontrado. Ele não existe.', 404);
     }
 
-    return await this.prisma.sayings.update({
-      data,
-      where: {
-        id,
-      },
-    });
+    return await this.prisma.sayings
+      .update({
+        data,
+        where: {
+          id,
+        },
+      })
+      .catch((e) => {
+        throw new HttpException(
+          `Algo deu errado ao atualizar este Ditado. Erro: ${e}`,
+          502,
+        );
+      });
   }
 
   async remove(id: string) {
@@ -59,13 +87,23 @@ export class SayingsService {
     });
 
     if (!saying) {
-      return { errorMsg: 'Este ditado não existe.' };
+      throw new HttpException('Ditado não encontrado. Ele não existe.', 404);
     }
 
-    return await this.prisma.sayings.delete({
-      where: {
-        id,
-      },
-    });
+    await this.prisma.sayings
+      .delete({
+        where: {
+          id,
+        },
+      })
+      .catch((e) => {
+        throw new HttpException(
+          `Algo deu errado ao remover este Ditado. Erro: ${e}`,
+          502,
+        );
+      })
+      .finally(() => {
+        throw new HttpException(`Ditado removido.`, 200);
+      });
   }
 }
