@@ -41,6 +41,7 @@ export class UsersService {
           lastName: true,
           email: true,
           created_at: true,
+          role: true,
         },
       })
       .catch((e) => {
@@ -56,6 +57,14 @@ export class UsersService {
       .findUnique({
         where: {
           id,
+        },
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          email: true,
+          created_at: true,
+          role: true,
         },
       })
       .catch((e) => {
