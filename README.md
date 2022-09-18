@@ -32,11 +32,9 @@ Alguns vídeos e guias que ajudaram no desenvolvimento deste projeto:
 - [Hash de senha no Prisma - stackverflow](https://stackoverflow.com/questions/69233726/cannot-hash-the-users-password-with-prisma-middleware-in-nestjs-on-create-user)
 - [HTTP Status Codes Cheat Sheet - blog](https://cheatography.com/kstep/cheat-sheets/http-status-codes/)
 
-
 ### Aprendizados
 
 O que aprendi, técnicas e comandos, durante esse projeto (para o João do futuro consultar, de nada futuro eu):
-- 
 
 ### Como executar o projeto localmente
 
