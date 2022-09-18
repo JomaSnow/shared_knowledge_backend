@@ -72,6 +72,27 @@ export class UsersService {
     return user;
   }
 
+  async findByEmail(email: string) {
+    const user = await this.prisma.users
+      .findUnique({
+        where: {
+          email,
+        },
+      })
+      .catch((e) => {
+        throw new HttpException(
+          `Algo deu errado ao resgatar este usuário. Erro: ${e}`,
+          502,
+        );
+      });
+
+    if (!user) {
+      throw new HttpException('Usuário não encontrado. Ele não existe.', 404);
+    }
+
+    return user;
+  }
+
   async update(id: string, data: UpdateUserDTO) {
     const user = await this.prisma.users.findUnique({
       where: {

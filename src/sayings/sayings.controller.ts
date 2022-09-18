@@ -7,7 +7,9 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { SayingDTO } from './dto/saying.dto';
 import { SayingsService } from './sayings.service';
 
@@ -16,6 +18,7 @@ export class SayingsController {
   constructor(private readonly sayingsService: SayingsService) {}
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   async create(@Body() data: SayingDTO) {
     return this.sayingsService.create(data);
   }
@@ -31,6 +34,7 @@ export class SayingsController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard('jwt'))
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() data: SayingDTO,
@@ -39,6 +43,7 @@ export class SayingsController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
   remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.sayingsService.remove(id);
   }
