@@ -1,10 +1,6 @@
 import { IsEmail, IsNotEmpty, Matches } from 'class-validator';
+import { Role } from '../../helper/enums/roles.enum';
 import { MessageValidator, RegexValidator } from '../../helper/validators';
-
-enum Role {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-}
 
 export class CreateUserDTO {
   @IsNotEmpty()
