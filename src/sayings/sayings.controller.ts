@@ -7,10 +7,12 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { SayingDTO } from './dto/saying.dto';
+import { CreateSayingDTO } from './dto/create_saying.dto';
+import { UpdateSayingDTO } from './dto/update_saying.dto';
 import { SayingsService } from './sayings.service';
 
 @Controller('sayings')
@@ -19,8 +21,8 @@ export class SayingsController {
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
-  async create(@Body() data: SayingDTO) {
-    return this.sayingsService.create(data);
+  async create(@Req() request, @Body() data: CreateSayingDTO) {
+    return this.sayingsService.create(request, data);
   }
 
   @Get()
@@ -33,18 +35,24 @@ export class SayingsController {
     return this.sayingsService.findOne(id);
   }
 
+  @Get('user/:id')
+  findAllFromAuthor(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.sayingsService.findAllFromAuthor(id);
+  }
+
   @Patch(':id')
   @UseGuards(AuthGuard('jwt'))
   update(
+    @Req() request,
     @Param('id', new ParseUUIDPipe()) id: string,
-    @Body() data: SayingDTO,
+    @Body() data: UpdateSayingDTO,
   ) {
-    return this.sayingsService.update(id, data);
+    return this.sayingsService.update(request, id, data);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'))
-  remove(@Param('id', new ParseUUIDPipe()) id: string) {
-    return this.sayingsService.remove(id);
+  remove(@Req() request, @Param('id', new ParseUUIDPipe()) id: string) {
+    return this.sayingsService.remove(request, id);
   }
 }

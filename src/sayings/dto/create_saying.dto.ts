@@ -1,17 +1,12 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class SayingDTO {
-  id?: string;
-  
+export class CreateSayingDTO {
   @IsNotEmpty()
   message: string;
-  
+
   @IsNotEmpty()
-  author: string;
-  
+  authorId: string;
+
   @IsNotEmpty()
   date: Date;
-  
-  @IsNotEmpty()
-  created_at: Date;
 }

@@ -13,21 +13,23 @@ datasource db {
 model Sayings {
   id         String   @id @default(uuid())
   message    String
-  author     String
   date       DateTime
   created_at DateTime @default(now())
+  author     Users    @relation(fields: [authorId], references: [id])
+  authorId   String
 
   @@map("tb_sayings")
 }
 
 model Users {
-  id         String   @id @default(uuid())
-  email      String   @unique
+  id         String    @id @default(uuid())
+  email      String    @unique
   firstName  String
   lastName   String
   password   String
-  role       Role     @default(USER)
-  created_at DateTime @default(now())
+  role       Role      @default(USER)
+  created_at DateTime  @default(now())
+  sayings    Sayings[]
 
   @@map("tb_users")
 }
