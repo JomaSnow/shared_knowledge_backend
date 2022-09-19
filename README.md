@@ -19,6 +19,7 @@ Os objetivos maiores do projeto por parte do back-end são:
     - Tratar erros HTTP
     - Utilizar criptografia para as senhas
     - Utilizar JWT para o login
+    - Permitir ou restringir acesso baseado em tipo de usuário
   - Aprender Prisma;
     - Conectar com o banco
     - Criar migrações
