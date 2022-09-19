@@ -1,6 +1,6 @@
 # Shared Knowledge
 
-Shared Knowledge é um pequeno projeto para praticar desenvolvimento full-stack com tecnologias e ferramentas atuais. Resolvi dividir o pojeto em 2 repositórios, um para o back-end e outro para o front-end. Você está vendo o repositório **back-end**. [Clique aqui para ver o repositório front-end](https://github.com).
+Shared Knowledge é um pequeno projeto para praticar desenvolvimento full-stack com tecnologias e ferramentas atuais. Resolvi dividir o pojeto em 2 repositórios, um para o back-end e outro para o front-end. Você está vendo o repositório **back-end**. [Clique aqui para ver o repositório front-end](https://github.com/JomaSnow/shared_knowledge_frontend).
 
 ## Sobre o projeto
 
@@ -45,9 +45,9 @@ Pré-requisito ter instalado Docker, NPM e Yarn.
 
 1. Criar e executar container rodando postgres
 2. Clonar repositório
-3. Criar arquivo .env com a url do banco de dados (utilizar login e senha usados no container)
-4. Rodar *yarn* para instalar dependências
-5. Rodar *yarn prisma migrate dev* para criar o banco de dados de fato
-6. Rodar *yarn prisma generate* para gerar os arquivos do schema no TypeScript 
+3. Rodar *yarn* para instalar dependências
+4. Rodar *yarn prisma migrate dev* para criar o banco de dados de fato
+5. Rodar *yarn prisma generate* para gerar os arquivos do schema no TypeScript 
+6. Criar ou editar arquivo .env com a url do banco de dados (utilizar login e senha usados no container) e 'JWT_SECRET' com alguma chave (ex: *openssl rand -base64 30*)
 7. Rodar *yarn start*
 
