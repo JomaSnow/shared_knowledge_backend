@@ -32,7 +32,16 @@ export class UsersService {
     return user;
   }
 
-  async findAll() {
+  async findAll(request) {
+    const role = await request.user.role;
+
+    if (!role || role !== 'ADMIN') {
+      throw new HttpException(
+        'Você não tem autorização para ver todos os usuários.',
+        401,
+      );
+    }
+
     return await this.prisma.users
       .findMany({
         select: {
@@ -52,7 +61,19 @@ export class UsersService {
       });
   }
 
-  async findOne(id: string) {
+  async findOne(request, id: string) {
+    const userRequester = await request.user;
+
+    if (
+      !userRequester ||
+      (userRequester.id !== id && userRequester.role !== 'ADMIN')
+    ) {
+      throw new HttpException(
+        'Você não tem autorização para ver este usuário.',
+        401,
+      );
+    }
+
     const user = await this.prisma.users
       .findUnique({
         where: {
@@ -81,6 +102,7 @@ export class UsersService {
     return user;
   }
 
+  // usado apenas para autenticação
   async findByEmail(email: string) {
     const user = await this.prisma.users
       .findUnique({
@@ -102,7 +124,19 @@ export class UsersService {
     return user;
   }
 
-  async update(id: string, data: UpdateUserDTO) {
+  async update(request, id: string, data: UpdateUserDTO) {
+    const userRequester = await request.user;
+
+    if (
+      !userRequester ||
+      (userRequester.id !== id && userRequester.role !== 'ADMIN')
+    ) {
+      throw new HttpException(
+        'Você não tem autorização para modificar este usuário.',
+        401,
+      );
+    }
+
     const user = await this.prisma.users.findUnique({
       where: {
         id,
@@ -128,7 +162,16 @@ export class UsersService {
       });
   }
 
-  async remove(id: string) {
+  async remove(request, id: string) {
+    const role = await request.user.role;
+
+    if (!role || role !== 'ADMIN') {
+      throw new HttpException(
+        'Você não tem autorização para remover usuários.',
+        401,
+      );
+    }
+
     const user = await this.prisma.users.findUnique({
       where: {
         id,

@@ -12,12 +12,14 @@ export class SayingsService {
   ) {}
 
   async create(request, data: CreateSayingDTO) {
-    const user = await this.usersService.findOne(request.user.id).catch((e) => {
-      throw new HttpException(
-        `Algo deu errado ao buscar autor. Erro: ${e}`,
-        502,
-      );
-    });
+    const user = await this.usersService
+      .findOne(request, request.user.id)
+      .catch((e) => {
+        throw new HttpException(
+          `Algo deu errado ao buscar autor. Erro: ${e}`,
+          502,
+        );
+      });
     data = { ...data, authorId: user.id };
 
     const saying = await this.prisma.sayings
@@ -86,7 +88,7 @@ export class SayingsService {
 
   async update(request, id: string, data: UpdateSayingDTO) {
     const author = await this.usersService
-      .findOne(request.user.id)
+      .findOne(request, request.user.id)
       .catch((e) => {
         throw new HttpException(
           `Algo deu errado ao buscar autor. Erro: ${e}`,
@@ -128,7 +130,7 @@ export class SayingsService {
 
   async remove(request, id: string) {
     const author = await this.usersService
-      .findOne(request.user.id)
+      .findOne(request, request.user.id)
       .catch((e) => {
         throw new HttpException(
           `Algo deu errado ao buscar autor. Erro: ${e}`,

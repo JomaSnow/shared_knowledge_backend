@@ -8,8 +8,10 @@ import {
   Delete,
   ParseUUIDPipe,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { request } from 'http';
 import { CreateUserDTO } from './dto/createUser.dto';
 import { UpdateUserDTO } from './dto/updateUser.dto';
 import { UsersService } from './users.service';
@@ -23,30 +25,35 @@ export class UsersController {
     return await this.usersService.create(data);
   }
 
+  // admin only
   @Get()
   @UseGuards(AuthGuard('jwt'))
-  async findAll() {
-    return await this.usersService.findAll();
+  async findAll(@Req() request) {
+    return await this.usersService.findAll(request);
   }
 
+  // admin and self
   @Get(':id')
   @UseGuards(AuthGuard('jwt'))
-  async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.usersService.findOne(id);
+  async findOne(@Req() request, @Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.usersService.findOne(request, id);
   }
 
+  // admin and self
   @Patch(':id')
   @UseGuards(AuthGuard('jwt'))
   async update(
+    @Req() request,
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() data: UpdateUserDTO,
   ) {
-    return await this.usersService.update(id, data);
+    return await this.usersService.update(request, id, data);
   }
 
+  //admin only
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'))
-  async remove(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.usersService.remove(id);
+  async remove(@Req() request, @Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.usersService.remove(request, id);
   }
 }
