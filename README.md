@@ -29,8 +29,11 @@ Alguns vídeos e guias que ajudaram no desenvolvimento deste projeto:
 - [Docker and PostgreSQL in [10 Minutes] - vídeo](https://www.youtube.com/watch?v=aHbE3pTyG-Q)
 - [Criando uma aplicação com NestJS e PrismaIO - vídeo](https://www.youtube.com/watch?v=0Idug0e9tPw)
 - [AUTENTICAÇÃO COM JWT NO NESTJS - vídeo](https://www.youtube.com/watch?v=jMprSQlDLGo)
-- [Hash de senha no Prisma - stackverflow](https://stackoverflow.com/questions/69233726/cannot-hash-the-users-password-with-prisma-middleware-in-nestjs-on-create-user)
+- [Hash de senha no Prisma - stackoverflow](https://stackoverflow.com/questions/69233726/cannot-hash-the-users-password-with-prisma-middleware-in-nestjs-on-create-user)
 - [HTTP Status Codes Cheat Sheet - blog](https://cheatography.com/kstep/cheat-sheets/http-status-codes/)
+- [Controllers no NestJS - documentação](https://docs.nestjs.com/controllers)
+- [Usando Prisma no NestJS - documentação](https://docs.nestjs.com/recipes/prisma)
+- [Relacionamentos no Prisma](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)
 
 ### Aprendizados
 
@@ -45,5 +48,6 @@ Pré-requisito ter instalado Docker, NPM e Yarn.
 3. Criar arquivo .env com a url do banco de dados (utilizar login e senha usados no container)
 4. Rodar *yarn* para instalar dependências
 5. Rodar *yarn prisma migrate dev* para criar o banco de dados de fato
-6. Rodar *yarn start*
+6. Rodar *yarn prisma generate* para gerar os arquivos do schema no TypeScript 
+7. Rodar *yarn start*
 
